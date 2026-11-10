@@ -1,0 +1,39 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam sequenceArrowColor #187b85
+actor Cliente
+participant "Gateway\n<<Mediator>>" as G
+participant "Nodo A\n<<hilo HTTP>>" as A
+participant "Nodo B\n<<hilo HTTP>>" as B
+database "SQLite" as D
+participant "Observador" as O
+Cliente -> G : POST /tickets
+activate G
+G -> G : validar, UUID y round-robin
+alt Nodo elegido disponible
+ G -> A : POST /process
+ activate A
+ A -> A : adquirir semáforo, simular 120 ms
+ A --> G : resultado / nodo-A
+ deactivate A
+else Nodo A no disponible
+ G -> A : POST /process
+ G <-- A : error de conexión
+ G -> B : reintentar POST /process (mismo UUID)
+ activate B
+ B -> B : adquirir semáforo, simular 120 ms
+ B --> G : resultado / nodo-B
+ deactivate B
+end
+G -> D : INSERT ticket procesado
+D --> G : ok
+G -> O : POST /events (ticket_creado)
+alt observador disponible
+ O --> G : 201 registrado
+else observador no disponible
+ G -> G : contar error, sin abortar ticket
+end
+G --> Cliente : HTTP 201 + ticket
+ deactivate G
+@enduml

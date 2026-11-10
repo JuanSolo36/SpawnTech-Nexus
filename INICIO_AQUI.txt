@@ -1,0 +1,36 @@
+SPAWNTECH NEXUS - PAQUETE ACADÉMICO DE ACTIVIDAD 4
+=================================================
+
+Este paquete incluye:
+- informes/SpawnTech_Nexus_Informe_Tecnico.pdf (informe con índice, UML, evidencia y APA 7)
+- docs/SpawnTech_Nexus_Presentacion.pptx (12 diapositivas editables)
+- docs/guion_video.md (guion de ~14 minutos)
+- arquitectura/*.puml (diagramas UML editables)
+- imagenes/*.png (diagramas y gráfico de rendimiento)
+- Código Python: gateway.py, worker.py, events.py, cluster.py, common.py,
+  launcher.py, demo_client.py, benchmark.py
+- pruebas/test_integracion.py y pruebas/resultados_reales.json
+- README.md con instrucciones, supuestos, límites y comandos.
+
+EJECUCIÓN EN WINDOWS/MAC/LINUX:
+1. Instalar Python 3.10 o superior.
+2. Abrir una terminal dentro de esta carpeta.
+3. Ejecutar: python launcher.py --workers 2
+4. En una SEGUNDA terminal, en la misma carpeta, ejecutar:
+   python demo_client.py
+5. Detener launcher con Ctrl+C.
+6. Ejecutar las pruebas:
+   python -m unittest discover -s pruebas -v
+   python benchmark.py
+
+ANTES DE ENTREGAR:
+[ ] Completar nombre, institución, docente y fecha en portada.
+[ ] Confirmar con docente que se permite modalidad individual; guía pide 4-5.
+[ ] Crear repositorio GitHub/GitLab y subir código; copiar enlace.
+[ ] Grabar video 12-15 min y subir a YouTube como NO LISTADO.
+[ ] Pegar enlaces reales al documento y al LMS.
+[ ] Verificar que el resultado de benchmark sea reproducible en tu equipo.
+
+IMPORTANTE: la prueba ejecutada en este paquete usa un solo equipo con procesos
+separados en localhost. No es un despliegue de nube real. No contiene enlace real
+al repositorio ni video, pues debes crearlos desde tus cuentas.

@@ -1,0 +1,25 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam nodeBackgroundColor #EAF6F8
+skinparam nodeBorderColor #274965
+node "Equipo de pruebas\n<<device>>" as PC {
+  node "SO local + Python\n<<executionEnvironment>>" {
+    artifact "Cliente curl / pruebas" as CLI
+    artifact "gateway.py\n127.0.0.1:8000" as G
+    artifact "worker.py A\n127.0.0.1:8011" as A
+    artifact "worker.py B\n127.0.0.1:8012" as B
+    artifact "events.py\n127.0.0.1:8020" as O
+    database "SQLite\nspawntech.db" as D
+  }
+}
+CLI --> G : HTTP / loopback
+G --> A : HTTP / loopback
+G --> B : HTTP / loopback
+G --> O : HTTP / loopback
+G --> D : archivo local
+note bottom of PC
+Nodos lógicos en procesos separados;
+NO equivale a nube ni a varias máquinas.
+end note
+@enduml

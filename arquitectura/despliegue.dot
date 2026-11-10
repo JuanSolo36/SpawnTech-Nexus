@@ -1,0 +1,26 @@
+digraph deploy {
+ graph [fontname="DejaVu Sans", fontsize=16, label="SpawnTech Nexus | UML de despliegue local", labelloc=t, bgcolor="white", ranksep=0.45, nodesep=0.35, pad=0.24, splines=polyline]
+ node [fontname="DejaVu Sans", fontsize=10, shape=box, style="filled,rounded", color="#28516B", fillcolor="#EDF7F7", margin="0.20,0.12"]
+ edge [fontname="DejaVu Sans",fontsize=8.5, color="#087E8B"]
+ subgraph cluster_pc {
+   label="<<device>> Equipo de pruebas — UNA máquina (localhost)"
+   style="filled,rounded"; color="#688E99"; fillcolor="#F4FAFB"; fontname="DejaVu Sans"; fontsize=12
+   subgraph cluster_python {
+     label="<<executionEnvironment>> Sistema operativo + Python"
+     style="rounded,dashed"; color="#9BB3B9"; fontname="DejaVu Sans"; fontsize=10
+     client [label="Cliente HTTP\ncurl / benchmark",fillcolor="#FFF6E3"]
+     gateway [label="<<artifact>> gateway.py\nPuerto 8000",fillcolor="#D5F4F1"]
+     workerA [label="<<artifact>> worker.py A\nPuerto 8011"]
+     workerB [label="<<artifact>> worker.py B\nPuerto 8012"]
+     events [label="<<artifact>> events.py\nPuerto 8020",fillcolor="#FEF3DB"]
+     db [shape=cylinder, label="<<artifact>> spawntech.db\nSQLite local",fillcolor="#F0E8FA"]
+   }
+ }
+ {rank=same; workerA;workerB;}
+ {rank=same; events;db;}
+ client -> gateway [label="HTTP loopback"]
+ gateway -> workerA [label="HTTP"]
+ gateway -> workerB [label="HTTP"]
+ gateway -> events [label="HTTP"]
+ gateway -> db [label="archivo"]
+}

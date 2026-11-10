@@ -1,0 +1,18 @@
+digraph components {
+  graph [fontname="DejaVu Sans", fontsize=17, label="SpawnTech Nexus | UML de componentes", labelloc=t, bgcolor="white", ranksep=0.75, nodesep=0.4, pad=0.25, splines=ortho]
+  node [shape=component, fontname="DejaVu Sans", fontsize=11, color="#28516B", penwidth=1.5, style=filled, fillcolor="#EAF5F7", margin="0.20,0.16"]
+  edge [fontname="DejaVu Sans", fontsize=9, color="#087E8B", arrowsize=0.75]
+  client [shape=oval, label="Cliente\nSpawnTech", fillcolor="#FFF6E3"]
+  api [label="API Gateway\n<<Proxy + Mediator>>", fillcolor="#D5F4F1"]
+  a [label="Procesador A\n<<hilos / nodo>>"]
+  b [label="Procesador B\n<<hilos / nodo>>"]
+  events [label="Observador\n<<Observer>>",fillcolor="#FEF3DB"]
+  db [shape=cylinder, label="SQLite\n<<repositorio>>",fillcolor="#F0E8FA"]
+  {rank=same; a; b;}
+  {rank=same; events; db;}
+  client -> api [label="POST /tickets"]
+  api -> a [label="POST /process"]
+  api -> b [label="POST /process"]
+  api -> events [label="POST /events"]
+  api -> db [label="INSERT / SELECT"]
+}

@@ -1,0 +1,63 @@
+{
+  "proyecto": "SpawnTech Nexus",
+  "fecha_utc": "2026-11-09T22:01:32.736343+00:00",
+  "entorno": {
+    "python": "3.13.5",
+    "so": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "red": "localhost/loopback (mismo equipo)",
+    "tiempo_simulado_por_tarea_ms": 120,
+    "hilos_activos_max_por_worker": 2
+  },
+  "metodologia": "Pruebas secuenciales con 48 peticiones, 12 clientes concurrentes, una pasada por escenario. No generalizable a producción.",
+  "un_nodo": {
+    "solicitudes": 48,
+    "concurrencia_clientes": 12,
+    "exitos": 48,
+    "errores": 0,
+    "duracion_seg": 2.92,
+    "throughput_solicitudes_seg": 16.44,
+    "latencia_p50_ms": 722.34,
+    "latencia_p95_ms": 732.39,
+    "por_nodo": {
+      "nodo-A": 48
+    },
+    "eventos_registrados_incluido_calentamiento": 52
+  },
+  "dos_nodos": {
+    "solicitudes": 48,
+    "concurrencia_clientes": 12,
+    "exitos": 48,
+    "errores": 0,
+    "duracion_seg": 1.483,
+    "throughput_solicitudes_seg": 32.36,
+    "latencia_p50_ms": 360.84,
+    "latencia_p95_ms": 378.53,
+    "por_nodo": {
+      "nodo-A": 24,
+      "nodo-B": 24
+    },
+    "eventos_registrados_incluido_calentamiento": 52
+  },
+  "fallo_nodo_A": {
+    "solicitudes": 12,
+    "concurrencia_clientes": 6,
+    "exitos": 12,
+    "errores": 0,
+    "duracion_seg": 0.762,
+    "throughput_solicitudes_seg": 15.74,
+    "latencia_p50_ms": 359.3,
+    "latencia_p95_ms": 389.81,
+    "por_nodo": {
+      "nodo-B": 12
+    }
+  },
+  "fallo_observador": {
+    "ticket_creado": true,
+    "fallos_observador_contabilizados": 1
+  },
+  "validacion": {
+    "ticket_valido": true,
+    "persistido": true
+  },
+  "mejora_throughput_pct": 96.8
+}

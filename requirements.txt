@@ -1,0 +1,2 @@
+# El prototipo utiliza exclusivamente la biblioteca estándar de Python 3.10+.
+# Para ejecutar la aplicación y las pruebas no hay dependencias externas.

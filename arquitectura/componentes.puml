@@ -1,0 +1,23 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam ArrowColor #187b85
+skinparam componentBorderColor #274965
+skinparam componentBackgroundColor #EAF6F8
+left to right direction
+actor "Cliente SpawnTech" as C
+component "API Gateway\n<<Proxy / Mediator>>" as G
+component "Procesador A\n<<Nodo / hilos>>" as A
+component "Procesador B\n<<Nodo / hilos>>" as B
+component "Observador de eventos\n<<Observer>>" as O
+database "Repositorio SQLite\n<<persistencia>>" as D
+C --> G : HTTP POST /tickets
+G --> A : HTTP /process
+G --> B : HTTP /process
+G --> D : INSERT / SELECT
+G --> O : POST /events
+note bottom of G
+Round-robin + reintento en otro nodo
+end note
+@enduml
